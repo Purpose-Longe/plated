@@ -1,11 +1,14 @@
-const userSection = document.getElementById("user");
-const recipeSection = document.getElementById("recipe");
-const refreshButton = document.getElementById("refresh");
+async function getRandomUser() {
+    const response = await fetch("https://randomuser.me/api/");
+    const data = await response.json();
+    const user = data.results[0];
 
-console.log(userSection);
-console.log(recipeSection);
-console.log(refreshButton);
+    const userInfo = {
+        name: `${user.name.first} ${user.name.last}`,
+        country: user.location.country,
+        image: user.picture.large
+    };
+    console.log(userInfo);
 
-refreshButton.addEventListener("click", () => {
-    console.log("Re-Plate");
-});
+}
+getRandomUser();
