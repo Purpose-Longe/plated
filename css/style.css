@@ -44,7 +44,8 @@ main{
 }
 
 .user-card,
-.recipe-card{
+.recipe-card,
+.trivia-card{
     background: #fff;
     border-radius: 16px;
     padding: 1.5rem;
@@ -70,6 +71,19 @@ main{
 .recipe-card p{
     color: #555;
     font-size: 0.95rem;
+}
+
+.trivia-card h3 {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+
+.trivia-card span {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: #999;
 }
 
 #refresh{

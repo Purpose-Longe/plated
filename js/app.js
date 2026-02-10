@@ -43,6 +43,25 @@ async function getRandomRecipe(){
     };
 }
 
+async function getTrivia() {
+  const response = await fetch(
+    "https://opentdb.com/api.php?amount=1&type=multiple"
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch trivia");
+  }
+
+  const data = await response.json();
+  const trivia = data.results[0];
+
+  return {
+    question: trivia.question,
+    category: trivia.category
+  };
+}
+
+
 function renderUser(user){
     userSection.innerHTML = `
     <div class="user-card">
@@ -64,22 +83,43 @@ function renderRecipe(recipe){
     `;
 }
 
+function renderTrivia(trivia) {
+  triviaSection.innerHTML = `
+    <div class="trivia-card">
+      <h3>Icebreaker</h3>
+      <p>${trivia.question}</p>
+      <span>${trivia.category}</span>
+    </div>
+  `;
+}
+
+
 async function loadPlated(){
     refreshButton.disabled = true;
-   userSection.innerHTML = "<p> Plating for someone...</p>";
+    userSection.innerHTML = "<p> Plating for someone...</p>";
     recipeSection.innerHTML = "<p> Finding a recipe...</p>";
+    triviaSection.innerHTML = "<p>Finding something to talk about...</p>";
+
 
     try{
         const user = await getRandomUser();
         const recipe = await getRandomRecipe();
-
+        const trivia = await getTrivia();
         renderUser(user);
         renderRecipe(recipe);
+        renderTrivia(trivia);
 
     }catch(error){
         console.error(error);
         userSection.innerHTML = "<p>Something went wrong.</p>";
         recipeSection.innerHTML = "<p> Please try again.</p>";
+        triviaSection.innerHTML = `
+  <div class="trivia-card">
+    <h3>Icebreaker</h3>
+    <p>Ask them about their favorite food.</p>
+  </div>
+`;
+
     }finally{
         refreshButton.disabled = false;
     }
