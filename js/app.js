@@ -2,23 +2,29 @@ const SPOONACULAR_API_KEY = "183bd38af7cb411c95d9ba568b454620";
 
 const userSection = document.getElementById("user");
 const recipeSection = document.getElementById("recipe");
+const triviaSection = document.getElementById("trivia");
 const refreshButton = document.getElementById("refresh");
 
 async function getRandomUser() {
-    const response = await fetch("https://randomuser.me/api/");
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
 
-    if (!response.ok){
-        throw new Error("failed to fetch user");
-    }
-    const data = await response.json();
-    const user = data.results[0];
-    return{
-        name: `${user.name.first} ${user.name.last}`,
-        country: user.location.country,
-        image: user.picture.large
-    };
+  if (!response.ok) {
+    throw new Error("Failed to fetch user");
+  }
 
+  const users = await response.json();
+  const randomIndex = Math.floor(Math.random() * users.length);
+  const user = users[randomIndex];
+
+  return {
+    name: user.name,
+    country: user.address.city,
+    image: `https://i.pravatar.cc/150?u=${user.id}`
+  };
 }
+
 
 async function getRandomRecipe(){
     const response = await fetch(`https://api.spoonacular.com/recipes/random?number=1&apiKey=${SPOONACULAR_API_KEY}`);
