@@ -1,0 +1,98 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family: system-ui, "Segoe UI", sans-serif;
+    background-color: #fafafa;
+    color: #222;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+header{
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+}
+
+header h1{
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+header p{
+    color: #666;
+    font-size: 1rem;
+}
+
+main{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width:768px){
+    main{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.user-card,
+.recipe-card{
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.user-card img,
+.recipe-card img{
+    width: 100%;
+    max-width: 260px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.user-card h2,
+.recipe-card h2{
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-card p,
+.recipe-card p{
+    color: #555;
+    font-size: 0.95rem;
+}
+
+#refresh{
+    display: block;
+    margin: 2rem auto 3rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 999px;
+    background-color: #111;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+#refresh:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#user p,
+#recipe p{
+    text-align: center;
+    color: #777;
+}
